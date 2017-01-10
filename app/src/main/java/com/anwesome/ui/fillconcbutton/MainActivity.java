@@ -8,7 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.anwesome.ui.concfillbuttonmodule.ActionListener;
 import com.anwesome.ui.concfillbuttonmodule.ConcFillButtonController;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +22,13 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ConcFillButtonController concFillButtonController = new ConcFillButtonController(this);
-        concFillButtonController.addButton();
+        concFillButtonController.addButton(600,600);
+        concFillButtonController.addButton(new ActionListener() {
+            @Override
+            public void onAction(View view) {
+                Toast.makeText(MainActivity.this,"Completed",Toast.LENGTH_LONG).show();
+            }
+        },100,300);
     }
 
     @Override
