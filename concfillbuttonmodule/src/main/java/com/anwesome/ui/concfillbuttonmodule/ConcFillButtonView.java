@@ -14,7 +14,17 @@ import android.view.View;
  */
 public class ConcFillButtonView extends View {
     private boolean shouldInvalidate = false;
-    private int dir = 0;
+    private int dir = 0,n=0;
+    private ActionListener actionListener;
+
+    public ActionListener getActionListener() {
+        return actionListener;
+    }
+
+    public void setActionListener(ActionListener actionListener) {
+        this.actionListener = actionListener;
+    }
+
     private int concIndex = 0;
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
     public ConcFillButtonView(Context context) {
@@ -54,9 +64,14 @@ public class ConcFillButtonView extends View {
         if(concIndex<0) {
             concIndex = 0;
             shouldInvalidate = false;
+            n=0;
         }
         else if(concIndex>UIConstants.CONC_LIMIT) {
+            if(n == 0 && actionListener!=null) {
+                actionListener.onAction(this);
+            }
             concIndex = UIConstants.CONC_LIMIT;
+            n++;
         }
         if(shouldInvalidate) {
             try {
@@ -79,6 +94,7 @@ public class ConcFillButtonView extends View {
                 break;
             case MotionEvent.ACTION_UP:
                 dir = -1;
+
                 break;
             default:
                 break;

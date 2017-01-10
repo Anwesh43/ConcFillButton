@@ -27,10 +27,22 @@ public class ConcFillButtonController {
             }
         }
     }
-    public void addButton() {
+    public void addButton(float... coordinates) {
+
         ConcFillButtonView buttonView = new ConcFillButtonView(activity.getApplicationContext());
-        buttonView.setX(300);
-        buttonView.setY(300);
+        if(coordinates.length == 2) {
+            buttonView.setX(coordinates[0]);
+            buttonView.setY(coordinates[1]);
+        }
+        activity.addContentView(buttonView,new ViewGroup.LayoutParams(w/3,w/3));
+    }
+    public void addButton(ActionListener actionListener,float... coordinates) {
+        ConcFillButtonView buttonView = new ConcFillButtonView(activity.getApplicationContext());
+        buttonView.setActionListener(actionListener);
+        if(coordinates.length == 2) {
+            buttonView.setX(coordinates[0]);
+            buttonView.setY(coordinates[1]);
+        }
         activity.addContentView(buttonView,new ViewGroup.LayoutParams(w/3,w/3));
     }
 }
